@@ -12,9 +12,11 @@ export const todos = (state = [], action) => {
             isCompleted:false
         });
     case MARK_TODO_AS_COMPLETED:
-        break;
+        return state.map(todo => todo.text === action.payload.text
+                ? {...todo, isCompleted: true}
+                : todo);
     case DELETE_TODO:
-        break;
+        return state.filter(todo => todo.text !== action.payload.text);
     default:
         return state;
     }
